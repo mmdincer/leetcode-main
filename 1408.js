@@ -21,12 +21,13 @@ Explanation: No string of words is substring of another string.
 */
 
 var stringMatching = function(words) {
-    const result = [];
-    for(const word of words) {
-        for(const w of words) {
-            if(word == w) continue; //kendisini içermesini kontrol edip her kelimenin result'a eklenmesini engelliyoruz
-            else if(word.includes(w)) result.push(w);
+    const result = new Set(); //değerlerin benzersiz olması için set kullandık
+    for (const word of words) {
+        for (const w of words) {
+            if (word !== w && word.includes(w)) { //kendisini içerme kontrolünü yapmamasını sağlıyoruz
+                result.add(w); 
+            }
         }
     }
-    return result;
+    return [...result]; //set'i array'e çevirdik
 };
